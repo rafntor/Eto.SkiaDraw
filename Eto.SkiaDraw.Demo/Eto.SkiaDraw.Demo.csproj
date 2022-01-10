@@ -14,4 +14,9 @@
     <ProjectReference Include="..\Eto.SkiaDraw\Eto.SkiaDraw.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<!-- Explicitly reference Linux native dlls to get them included -->
+		<PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.80.3" />
+	</ItemGroup>
+
 </Project>

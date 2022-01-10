@@ -1,5 +1,6 @@
 
 using System;
+using System.ComponentModel;
 using SkiaSharp;
 using Eto.Forms;
 using Eto.Drawing;
@@ -29,7 +30,7 @@ namespace Eto.SkiaDraw
 		}
 		void ReallocBitmaps()
 		{
-			if (Size != _eto_bitmap.Size)
+			if (Width > 0 && Height > 0 && Size != _eto_bitmap.Size)
 			{
 				_skia_canvas.Dispose();
 				_skia_bitmap.Dispose();
@@ -78,6 +79,7 @@ namespace Eto.SkiaDraw
 			if (_skia_bitmap.Encode(memory, SKEncodedImageFormat.Png, 100))
 				_eto_bitmap = new Bitmap(memory);
 		}
+		[EditorBrowsable(EditorBrowsableState.Never)]
 		public void Test(int num)
 		{
 			var sw = new System.Diagnostics.Stopwatch();
@@ -104,14 +106,21 @@ namespace Eto.SkiaDraw
 
 			//
 
-			sw.Start();
+			try // blows up under linux
+			{
+				sw.Start();
 
-			for (int i = 0; i < num; ++i)
-				CopyBitmap3();
+				for (int i = 0; i < num; ++i)
+					CopyBitmap3();
 
-			sw.Stop();
+				sw.Stop();
 
-			MessageBox.Show($"copy3 : {sw.ElapsedMilliseconds} ms");
+				MessageBox.Show($"copy3 : {sw.ElapsedMilliseconds} ms");
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show($"copy3 : {ex.Message}");
+			}
 		}
 #endif
 	}
