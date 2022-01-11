@@ -11,10 +11,6 @@ namespace Eto.SkiaDraw.Demo
 			InitializeComponent();
 
 			Content = new TestView();
-
-#if DEBUG
-			Content.MouseDoubleClick += (o, e) => (Content as SkiaDrawable).Test(100);
-#endif
 		}
 	}
 }

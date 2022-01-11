@@ -9,9 +9,9 @@ namespace Eto.SkiaDraw
 {
 	public class SkiaDrawable : Drawable
 	{
+		static SKColorType _color_type = Platform.Instance.IsWinForms || Platform.Instance.IsWpf ? SKColorType.Bgra8888 : SKColorType.Rgba8888;
 		Bitmap _eto_bitmap = new Bitmap(1, 1, PixelFormat.Format32bppRgba);
-		SKCanvas _skia_canvas = new SKCanvas(new SKBitmap());
-		SKBitmap _skia_bitmap = new SKBitmap();
+		SKImageInfo _img_info = SKImageInfo.Empty;
 		public SkiaDrawable()
 		{
 		}
@@ -20,108 +20,25 @@ namespace Eto.SkiaDraw
 		}
 		protected override void OnPaint(PaintEventArgs e)
 		{
-			ReallocBitmaps();
-
-			OnPaint(_skia_canvas);
-
-			CopyBitmap1();
-
-			e.Graphics.DrawImage(_eto_bitmap, PointF.Empty);
-		}
-		void ReallocBitmaps()
-		{
-			if (Width > 0 && Height > 0 && Size != _eto_bitmap.Size)
+			if (Width > 0 && Height > 0)
 			{
-				_skia_canvas.Dispose();
-				_skia_bitmap.Dispose();
-				_eto_bitmap.Dispose();
-
-				_eto_bitmap = new Bitmap(Size, PixelFormat.Format32bppRgba);
-				_skia_bitmap = new SKBitmap(Width, Height, false);
-				_skia_canvas = new SKCanvas(_skia_bitmap);
-			}
-		}
-		void CopyBitmap1()
-		{
-			using (var eto = _eto_bitmap.Lock())
-			{
-				unsafe
+				if (Size != _eto_bitmap.Size)
 				{
-					System.Buffer.MemoryCopy(
-						_skia_bitmap.GetPixels().ToPointer(), eto.Data.ToPointer(),
-						_eto_bitmap.Height * eto.ScanWidth, _skia_bitmap.ByteCount);
+					_eto_bitmap.Dispose();
+					_eto_bitmap = new Bitmap(Size, PixelFormat.Format32bppRgba);
+					_img_info = new SKImageInfo(Width, Height, _color_type, SKAlphaType.Premul);
 				}
-			}
-		}
-#if DEBUG
-		void CopyBitmap2()
-		{
-			using (var eto = _eto_bitmap.Lock())
-			{
-				unsafe
+
+				using (var bmp = _eto_bitmap.Lock())
 				{
-					var dest = (byte*)eto.Data.ToPointer();
-					var src = (byte*)_skia_bitmap.GetPixels();
-
-					var dest_siz = Height * eto.ScanWidth;
-					var src_siz = _skia_bitmap.ByteCount;
-					var siz = Math.Min(dest_siz, src_siz);
-
-					for (int i = 0; i < siz; ++i)
-						dest[i] = src[i];
+					using (var surface = SKSurface.Create(_img_info, bmp.Data, bmp.ScanWidth))
+					{
+						OnPaint(surface.Canvas);
+					}
 				}
+
+				e.Graphics.DrawImage(_eto_bitmap, PointF.Empty);
 			}
 		}
-		void CopyBitmap3()
-		{
-			using var memory = new System.IO.MemoryStream();
-
-			if (_skia_bitmap.Encode(memory, SKEncodedImageFormat.Png, 100))
-				_eto_bitmap = new Bitmap(memory);
-		}
-		[EditorBrowsable(EditorBrowsableState.Never)]
-		public void Test(int num)
-		{
-			var sw = new System.Diagnostics.Stopwatch();
-
-			sw.Start();
-
-			for (int i = 0; i < num; ++i)
-				CopyBitmap1();
-
-			sw.Stop();
-
-			MessageBox.Show($"copy1 : {sw.ElapsedMilliseconds} ms");
-
-			//
-
-			sw.Start();
-
-			for (int i = 0; i < num; ++i)
-				CopyBitmap2();
-
-			sw.Stop();
-
-			MessageBox.Show($"copy2 : {sw.ElapsedMilliseconds} ms");
-
-			//
-
-			try // blows up under linux
-			{
-				sw.Start();
-
-				for (int i = 0; i < num; ++i)
-					CopyBitmap3();
-
-				sw.Stop();
-
-				MessageBox.Show($"copy3 : {sw.ElapsedMilliseconds} ms");
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show($"copy3 : {ex.Message}");
-			}
-		}
-#endif
 	}
 }

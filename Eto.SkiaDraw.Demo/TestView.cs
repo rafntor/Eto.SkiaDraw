@@ -16,7 +16,7 @@ namespace Eto.SkiaDraw.Demo
 
 		protected override void OnPaint(SKCanvas canvas)
 		{
-			SKColor [] colors= { SKColors.DarkGoldenrod, SKColors.GreenYellow };
+			SKColor [] colors= { SKColors.DeepPink, SKColors.DeepSkyBlue };
 
 			for (int i=0;i<5; ++i)
 				canvas.DrawOval(Width / 2, Height / 2, Width/(3+i), Height / (3+i), new SKPaint() { Color = colors[i % 2], IsAntialias=true });
