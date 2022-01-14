@@ -5,12 +5,26 @@
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <Description>Provides an Eto.Forms view control that allows using SkiaSharp functionality for drawing and use Eto for rendering to screen.</Description>
+        <PackageProjectUrl>https://github.com/rafntor/Eto.SkiaDraw</PackageProjectUrl>
+        <PackageIcon>skiasharp.png</PackageIcon>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <RepositoryUrl>https://github.com/rafntor/Eto.SkiaDraw</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>Eto;Eto.Forms;Skia;SkiaSharp</PackageTags>
+        <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+        <EnableNETAnalyzers>True</EnableNETAnalyzers>
+        <Copyright>Copyright © 2021 Tore Fuglestad</Copyright>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="Eto.Forms" Version="2.5.11" />
       <PackageReference Include="SkiaSharp" Version="2.80.3" />
-      <PackageReference Include="GitVersion.MsBuild" Version="5.7.0" />
+      <PackageReference Include="GitVersion.MsBuild" Version="5.7.0">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
     </ItemGroup>
 
 	<ItemGroup>
@@ -20,7 +34,11 @@
 		</None>
 		<None Include="..\README.md">
 			<Pack>True</Pack>
-			<PackagePath></PackagePath>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\skiasharp.png">
+		  <Pack>True</Pack>
+		  <PackagePath>\</PackagePath>
 		</None>
 	</ItemGroup>
 
