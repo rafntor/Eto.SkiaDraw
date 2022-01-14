@@ -21,7 +21,7 @@
     <ItemGroup>
       <PackageReference Include="Eto.Forms" Version="2.5.11" />
       <PackageReference Include="SkiaSharp" Version="2.80.3" />
-      <PackageReference Include="GitVersion.MsBuild" Version="5.7.0">
+      <PackageReference Include="GitVersion.MsBuild" Version="5.8.1">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
