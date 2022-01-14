@@ -1,30 +1,25 @@
-using Eto.Drawing;
-using Eto.Forms;
-using System;
 
 namespace Eto.SkiaDraw.Demo
 {
-	partial class MainForm : Form
-	{
-		void InitializeComponent()
-		{
-			Title = "My Eto Form";
-			MinimumSize = new Size(200, 150);
-			Size = MinimumSize * 4;
-			Padding = 10;
+	using Eto.Drawing;
+	using Eto.Forms;
 
-			Content = new StackLayout
+	public partial class MainForm : Form
+	{
+		private void InitializeComponent()
+		{
+			this.Title = "My Eto Form";
+			this.MinimumSize = new Size(200, 150);
+			this.Size = this.MinimumSize * 4;
+			this.Padding = 10;
+
+			this.Content = new StackLayout
 			{
 				Items =
 				{
 					"Hello World!",
-					// add more controls here
-				}
+				},
 			};
-
-			// create a few commands that can be used for the menu and toolbar
-//			var clickMe = new Command { MenuText = "Click Me!", ToolBarText = "Click Me!" };
-//			clickMe.Executed += (sender, e) => SwitchContent();
 
 			var quitCommand = new Command { MenuText = "Quit", Shortcut = Application.Instance.CommonModifier | Keys.Q };
 			quitCommand.Executed += (sender, e) => Application.Instance.Quit();
@@ -33,14 +28,11 @@ namespace Eto.SkiaDraw.Demo
 			aboutCommand.Executed += (sender, e) => new AboutDialog().ShowDialog(this);
 
 			// create menu
-			Menu = new MenuBar
+			this.Menu = new MenuBar
 			{
 				Items =
 				{
 					// File submenu0
-//					new SubMenuItem { Text = "&File", Items = { clickMe } },
-					// new SubMenuItem { Text = "&Edit", Items = { /* commands/items */ } },
-					// new SubMenuItem { Text = "&View", Items = { /* commands/items */ } },
 				},
 				ApplicationItems =
 				{
@@ -48,11 +40,8 @@ namespace Eto.SkiaDraw.Demo
 					new ButtonMenuItem { Text = "&Preferences..." },
 				},
 				QuitItem = quitCommand,
-				AboutItem = aboutCommand
+				AboutItem = aboutCommand,
 			};
-
-			// create toolbar			
-//			ToolBar = new ToolBar { Items = { clickMe } };
 		}
 	}
 }

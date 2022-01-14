@@ -8,5 +8,20 @@ indent_size =3
 trim_trailing_whitespace=true
 insert_final_newline=true
 
+# SA1027: Use tabs correctly
+dotnet_diagnostic.SA1027.severity = suggestion
+
+# SA1633: File should have header
+dotnet_diagnostic.SA1633.severity = suggestion
+
+# SA1517: Code should not contain blank lines at start of file
+dotnet_diagnostic.SA1517.severity = suggestion
+
+# SA1010: Opening square brackets should be spaced correctly
+dotnet_diagnostic.SA1010.severity = suggestion
+
+# SA1503: Braces should not be omitted
+dotnet_diagnostic.SA1503.severity = suggestion
+
 [*.json]
 indent_size = 2

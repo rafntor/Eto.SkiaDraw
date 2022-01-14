@@ -1,14 +1,9 @@
-using Eto.Forms;
-using SkiaSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Eto.SkiaDraw.Demo
 {
-	class TestView : SkiaDrawable
+	using SkiaSharp;
+
+	internal class TestView : SkiaDrawable
 	{
 		public TestView()
 		{
@@ -16,10 +11,10 @@ namespace Eto.SkiaDraw.Demo
 
 		protected override void OnPaint(SKCanvas canvas)
 		{
-			SKColor [] colors= { SKColors.DeepPink, SKColors.DeepSkyBlue };
+			SKColor [] colors = { SKColors.DeepPink, SKColors.DeepSkyBlue };
 
-			for (int i=0;i<5; ++i)
-				canvas.DrawOval(Width / 2, Height / 2, Width/(3+i), Height / (3+i), new SKPaint() { Color = colors[i % 2], IsAntialias=true });
+			for (int i = 0; i < 5; ++i)
+				canvas.DrawOval((float)this.Width / 2, (float)this.Height / 2, (float)this.Width / (3 + i), (float)this.Height / (3 + i), new SKPaint() { Color = colors[i % 2], IsAntialias = true });
 		}
 	}
 }

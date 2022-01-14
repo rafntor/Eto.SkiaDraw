@@ -1,16 +1,15 @@
-using Eto.Drawing;
-using Eto.Forms;
-using System;
 
 namespace Eto.SkiaDraw.Demo
 {
+	using Eto.Forms;
+
 	public partial class MainForm : Form
 	{
 		public MainForm()
 		{
-			InitializeComponent();
+			this.InitializeComponent();
 
-			Content = new TestView();
+			this.Content = new TestView();
 		}
 	}
 }
