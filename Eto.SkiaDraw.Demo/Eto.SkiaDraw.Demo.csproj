@@ -8,6 +8,8 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+	  <!-- include native libSkiaSharp (++?) when publishing selfcontained -->
+	  <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
   </PropertyGroup>
 
   <ItemGroup>
