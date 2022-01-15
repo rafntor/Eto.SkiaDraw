@@ -14,8 +14,9 @@
         <RepositoryType>git</RepositoryType>
         <PackageTags>Eto;Eto.Forms;Skia;SkiaSharp</PackageTags>
         <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-        <Copyright>Copyright © 2021 Tore Fuglestad</Copyright>
+        <Copyright>Copyright © 2022 Tore Fuglestad</Copyright>
         <EnableNETAnalyzers>True</EnableNETAnalyzers>
+        <Authors>Tore Fuglestad</Authors>
     </PropertyGroup>
 
     <ItemGroup>
