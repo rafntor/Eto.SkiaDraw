@@ -9,12 +9,13 @@ namespace Eto.SkiaDraw
 
 	public class SkiaDrawable : Drawable
 	{
-		private static SKColorType colorType = Platform.Instance.IsWinForms || Platform.Instance.IsWpf ? SKColorType.Bgra8888 : SKColorType.Rgba8888;
+		private readonly SKColorType colorType;
 		private Bitmap etoBitmap = new Bitmap(1, 1, PixelFormat.Format32bppRgba);
 		private SKImageInfo imgInfo = SKImageInfo.Empty;
 
 		public SkiaDrawable()
 		{
+			colorType = Platform.Instance.IsWinForms || Platform.Instance.IsWpf ? SKColorType.Bgra8888 : SKColorType.Rgba8888;
 		}
 
 		protected virtual void OnPaint(SKCanvas canvas)
@@ -22,6 +23,17 @@ namespace Eto.SkiaDraw
 		}
 
 		protected override void OnPaint(PaintEventArgs e)
+		{
+			try
+			{
+				OnPaint(e.Graphics);
+			}
+			catch (Exception ex)
+			{
+				e.Graphics.DrawText(Fonts.Monospace(12), Colors.Red, PointF.Empty, ex.ToString());
+			}
+		}
+		private void OnPaint(Graphics graphics)
 		{
 			if (this.Width > 0 && this.Height > 0)
 			{
@@ -40,7 +52,7 @@ namespace Eto.SkiaDraw
 					}
 				}
 
-				e.Graphics.DrawImage(this.etoBitmap, PointF.Empty);
+				graphics.DrawImage(this.etoBitmap, PointF.Empty);
 			}
 		}
 	}
