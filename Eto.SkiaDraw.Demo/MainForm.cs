@@ -9,7 +9,7 @@ namespace Eto.SkiaDraw.Demo
 		{
 			this.InitializeComponent();
 
-			this.Content = new TestView();
+			this.Content = new TableLayout(new TableRow(new TableCell(new TestView(), true), new TableCell(new TestView2(), true)));
 		}
 	}
 }

@@ -17,12 +17,12 @@ Use NuGet to install [`Eto.SkiaDraw`](https://www.nuget.org/packages/Eto.SkiaDra
 ```cs
 class TestView : SkiaDrawable
 {
-   protected override void OnPaint(SKCanvas canvas)
+   protected override void OnPaint(SKPaintEventArgs e)
    {
-      SKColor [] colors= { SKColors.DeepPink, SKColors.DeepSkyBlue };
+      SKColor [] colors = { SKColors.DeepPink, SKColors.DeepSkyBlue };
 
-      for (int i=0;i<5; ++i)
-         canvas.DrawOval(Width / 2, Height / 2, Width/(3+i), Height / (3+i), new SKPaint() { Color = colors[i % 2] });
+      for (int i = 0; i < 5; ++i)
+         e.Surface.Canvas.DrawOval(Width/2, Height/2, Width/(2+i), Height/(2+i), new SKPaint() { Color = colors[i % 2], IsAntialias = true });
    }
 }
 ```
