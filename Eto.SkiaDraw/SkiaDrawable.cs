@@ -45,7 +45,7 @@ namespace Eto.SkiaDraw
 				{
 					this.etoBitmap.Dispose();
 					this.etoBitmap = new Bitmap(this.Size, PixelFormat.Format32bppRgba);
-					this.imgInfo = new SKImageInfo(this.Width, this.Height, this.colorType, SKAlphaType.Premul);
+					this.imgInfo = new SKImageInfo(this.Width, this.Height, this.colorType, SKAlphaType.Unpremul);
 				}
 
 				using (var bmp = this.etoBitmap.Lock())
