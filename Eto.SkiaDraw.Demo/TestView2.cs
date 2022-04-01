@@ -3,7 +3,7 @@ namespace Eto.SkiaDraw.Demo
 {
 	using SkiaSharp;
 
-	internal class TestView2 : SkiaDrawable
+	internal class TestView2 : SkiaGLSurface
 	{
 		public TestView2()
 		{
@@ -13,6 +13,8 @@ namespace Eto.SkiaDraw.Demo
 		private void TestView2_Paint(object sender, SKPaintEventArgs e)
 		{
 			SKColor[] colors = { SKColors.MediumPurple, SKColors.GreenYellow };
+
+			e.Surface.Canvas.Clear();
 
 			for (int i = 0; i < 5; ++i)
 			{
