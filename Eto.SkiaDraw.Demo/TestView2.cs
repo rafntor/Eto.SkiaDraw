@@ -3,7 +3,7 @@ namespace Eto.SkiaDraw.Demo
 {
 	using SkiaSharp;
 
-	internal class TestView2 : SkiaGLSurface
+	internal class TestView2 : SkiaPanel
 	{
 		public TestView2()
 		{
@@ -16,7 +16,7 @@ namespace Eto.SkiaDraw.Demo
 
 			e.Surface.Canvas.Clear();
 
-			for (int i = 0; i < 5; ++i)
+			for (int i = 0; i < 8; ++i)
 			{
 				var c = this.Size / 2;
 

@@ -1,21 +1,26 @@
 # Eto.SkiaDraw
 
 [![Build](https://github.com/rafntor/Eto.SkiaDraw/actions/workflows/build.yml/badge.svg)](https://github.com/rafntor/Eto.SkiaDraw/actions/workflows/build.yml)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=rafntor_Eto.SkiaDraw&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=rafntor_Eto.SkiaDraw)
 [![NuGet](http://img.shields.io/nuget/v/Eto.SkiaDraw.svg)](https://www.nuget.org/packages/Eto.SkiaDraw/)
 [![License](https://img.shields.io/github/license/rafntor/Eto.SkiaDraw)](LICENSE)
 
-Provides an [**Eto.Forms**](https://github.com/picoe/Eto) view control that
+Provides 3 different [**Eto.Forms**](https://github.com/picoe/Eto) controls that
 allows using [**SkiaSharp**](https://github.com/mono/SkiaSharp)
-functionality for drawing and let Eto do the rendering.
+drawing in Eto:
+
+* `Eto.SkiaDraw.SkiaDrawable` forwards Skia graphics for rendering to screen by `Eto.Drawing` functionality.
+* `Eto.SkiaDraw.SkiaGLSurface` works like the SkiaDrawable control but renders to [OpenGL](https://www.opengl.org/) via [Eto.OpenTK](https://www.nuget.org/packages/Eto.OpenTK/).
+* `Eto.SkiaDraw.SkiaPanel` tries to create a SkiaGLSurface but falls back to SkiaDrawable if OpenTK is not available.
+
 
 Demo applications : https://nightly.link/rafntor/Eto.SkiaDraw/workflows/build/master
 
 ## Quickstart
 
-Use NuGet to install [`Eto.SkiaDraw`](https://www.nuget.org/packages/Eto.SkiaDraw/), then subclass a `Eto.SkiaDraw.SkiaDrawable` and override the `OnPaint` event like in the following example:
-```cs
-class TestView : SkiaDrawable
+Use NuGet to install [`Eto.SkiaDraw`](https://www.nuget.org/packages/Eto.SkiaDraw/), then subclass a `Eto.SkiaDraw.SkiaPanel` and override the `OnPaint` event like in the example below.  
+For OpenGL support you also need to add a platform-specific [Eto.OpenTK](https://www.nuget.org/packages?q=eto+opentk) package.
+```csharp
+class TestView : SkiaPanel
 {
    protected override void OnPaint(SKPaintEventArgs e)
    {
@@ -26,5 +31,4 @@ class TestView : SkiaDrawable
    }
 }
 ```
-
 ![](./quickstart.png)  
