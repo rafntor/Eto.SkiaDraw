@@ -13,7 +13,7 @@ namespace Eto.SkiaDraw
 		private Bitmap etoBitmap = new Bitmap(1, 1, PixelFormat.Format32bppRgba);
 		private SKImageInfo imgInfo = SKImageInfo.Empty;
 
-		public event EventHandler<SKPaintEventArgs> Paint;
+		new public event EventHandler<SKPaintEventArgs>? Paint;
 
 		public SkiaDrawable()
 		{

@@ -18,15 +18,12 @@
 
 	<ItemGroup>
 		<!-- Explicitly reference Linux native dlls to get them included -->
+		<PackageReference Include="Eto.OpenTK.WinForms" Version="0.1.2" />
+		<PackageReference Include="Eto.OpenTK.Mac64" Version="0.1.2" />
+		<PackageReference Include="Eto.OpenTK.Wpf" Version="0.1.2" />
+		<PackageReference Include="Eto.OpenTK.Gtk2" Version="0.1.2" />
+		<PackageReference Include="Eto.OpenTK.XamMac2" Version="0.1.2" />
 		<PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.80.3" />
-		<PackageReference Include="SonarAnalyzer.CSharp" Version="8.36.0.43782">
-		  <PrivateAssets>all</PrivateAssets>
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
-		  <PrivateAssets>all</PrivateAssets>
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
 	</ItemGroup>
 
 </Project>
