@@ -12,18 +12,19 @@
 	  <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Eto.SkiaDraw\Eto.SkiaDraw.csproj" />
-  </ItemGroup>
-
 	<ItemGroup>
 		<!-- Explicitly reference Linux native dlls to get them included -->
-		<PackageReference Include="Eto.OpenTK.WinForms" Version="0.1.2" />
-		<PackageReference Include="Eto.OpenTK.Mac64" Version="0.1.2" />
-		<PackageReference Include="Eto.OpenTK.Wpf" Version="0.1.2" />
-		<PackageReference Include="Eto.OpenTK.Gtk2" Version="0.1.2" />
-		<PackageReference Include="Eto.OpenTK.XamMac2" Version="0.1.2" />
+		<PackageReference Condition="'$(BuildPlatform)' == 'Windows'" Include="Eto.OpenTK.WinForms" Version="0.1.2" />
+		<PackageReference Condition="'$(BuildPlatform)' == 'Mac64'" Include="Eto.OpenTK.Mac64" Version="0.1.2" />
+		<PackageReference Condition="'$(BuildPlatform)' == 'Wpf'" Include="Eto.OpenTK.Wpf" Version="0.1.2" />
+		<PackageReference Condition="'$(BuildPlatform)' == 'Gtk2'" Include="Eto.OpenTK.Gtk2" Version="0.1.2" />
+		<PackageReference Condition="'$(BuildPlatform)' == 'XamMac2'" Include="Eto.OpenTK.XamMac2" Version="0.1.2" />
 		<PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.80.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Eto.Skia.Veldrid\Eto.Skia.Veldrid.csproj" />
+	  <ProjectReference Include="..\Eto.SkiaDraw\Eto.SkiaDraw.csproj" />
 	</ItemGroup>
 
 </Project>

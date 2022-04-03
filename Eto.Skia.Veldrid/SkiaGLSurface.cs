@@ -1,5 +1,5 @@
 
-namespace Eto.SkiaDraw
+namespace Eto.Skia.Veldrid
 {
 	using System;
 	using Eto.Drawing;
