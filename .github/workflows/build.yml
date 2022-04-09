@@ -40,13 +40,13 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
     - name: Upload Eto.SkiaDraw.Mac artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Eto.SkiaDraw.Demo.Mac
         path: Eto.SkiaDraw.Demo.Mac.tar
 
     - name: Upload Eto.SkiaDraw.Gtk artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Eto.SkiaDraw.Demo.Gtk
         path: Eto.SkiaDraw.Demo.Gtk.tar
@@ -69,13 +69,13 @@ jobs:
         dotnet publish -r win-x64 -p:PublishSingleFile=true --self-contained Eto.SkiaDraw.Demo
     
     - name: Upload TestApp.Wpf artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Eto.SkiaDraw.Demo.Wpf
         path: Eto.SkiaDraw.Demo/bin/Wpf/Debug/net6.0-windows/win-x64/publish/Eto.SkiaDraw.Demo.exe
 
     - name: Upload nuget artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: nuget
         path: Eto.SkiaDraw/bin/Release/*.nupkg
