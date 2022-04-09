@@ -1,7 +1,6 @@
 # Eto.SkiaDraw
 
 [![Build](https://github.com/rafntor/Eto.SkiaDraw/actions/workflows/build.yml/badge.svg)](https://github.com/rafntor/Eto.SkiaDraw/actions/workflows/build.yml)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=rafntor_Eto.SkiaDraw&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=rafntor_Eto.SkiaDraw)
 [![NuGet](http://img.shields.io/nuget/v/Eto.SkiaDraw.svg)](https://www.nuget.org/packages/Eto.SkiaDraw/)
 [![License](https://img.shields.io/github/license/rafntor/Eto.SkiaDraw)](LICENSE)
 
