@@ -8,7 +8,7 @@ on:
   pull_request:
     branches: [ master ]
   schedule:
-  - cron: "* * * * 0" # weekly on sunday
+  - cron: "0 3 * * 0" # weekly, Sunday 03:00 UTC
 
 jobs:
   build-ubuntu:
