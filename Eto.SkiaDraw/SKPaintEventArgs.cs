@@ -6,6 +6,13 @@ namespace Eto.SkiaDraw
 
 	public class SKPaintEventArgs : EventArgs
 	{
+		public SKPaintEventArgs(SKSurface surface, SKImageInfo info, SKRect clipRect)
+		{
+			this.Surface = surface;
+			this.Info = info;
+			this.ClipRect = clipRect;
+		}
+
 		public SKSurface Surface { get; private set; }
 
 		/// <summary>
@@ -23,12 +30,5 @@ namespace Eto.SkiaDraw
 		/// control's bounds.
 		/// </summary>
 		public SKRect ClipRect { get; private set; }
-
-		public SKPaintEventArgs(SKSurface surface, SKImageInfo info, SKRect clipRect)
-		{
-			this.Surface = surface;
-			this.Info = info;
-			this.ClipRect = clipRect;
-		}
 	}
 }
