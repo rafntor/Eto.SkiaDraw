@@ -29,7 +29,7 @@ namespace Eto.SkiaDraw
 		{
 			try
 			{
-				this.OnPaint(e.Graphics);
+				this.OnPaint(e.Graphics, e.ClipRectangle);
 			}
 			catch (Exception ex)
 			{
@@ -37,7 +37,7 @@ namespace Eto.SkiaDraw
 			}
 		}
 
-		private void OnPaint(Graphics graphics)
+		private void OnPaint(Graphics graphics, RectangleF clipRectangle)
 		{
 			if (this.Width > 0 && this.Height > 0)
 			{
@@ -46,13 +46,28 @@ namespace Eto.SkiaDraw
 					this.etoBitmap.Dispose();
 					this.etoBitmap = new Bitmap(this.Size, PixelFormat.Format32bppRgba);
 					this.imgInfo = new SKImageInfo(this.Width, this.Height, this.colorType, SKAlphaType.Unpremul);
+
+					// A resize invalidates the whole surface, regardless of what the platform reports as dirty.
+					clipRectangle = new RectangleF(0, 0, this.Width, this.Height);
+				}
+
+				var clipRect = SKRect.Create(this.imgInfo.Width, this.imgInfo.Height);
+				if (!clipRectangle.IsEmpty)
+				{
+					clipRect.Intersect(SKRect.Create(clipRectangle.X, clipRectangle.Y, clipRectangle.Width, clipRectangle.Height));
 				}
 
 				using (var bmp = this.etoBitmap.Lock())
 				{
 					using (var surface = SKSurface.Create(this.imgInfo, bmp.Data, bmp.ScanWidth))
 					{
-						this.OnPaint(new SKPaintEventArgs(surface, this.imgInfo));
+						// Clip the canvas so consumers that skip drawing outside ClipRect (e.g. via
+						// viewport culling) get a real perf win, and so nothing outside the requested
+						// region overwrites still-valid content from a previous frame.
+						surface.Canvas.Save();
+						surface.Canvas.ClipRect(clipRect);
+						this.OnPaint(new SKPaintEventArgs(surface, this.imgInfo, clipRect));
+						surface.Canvas.Restore();
 					}
 				}
 
