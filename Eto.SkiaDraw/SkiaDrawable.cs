@@ -14,12 +14,12 @@ namespace Eto.SkiaDraw
 		private SKImageInfo imgInfo = SKImageInfo.Empty;
 		private float scale = 1f;
 
-		public event EventHandler<SKPaintEventArgs> Paint;
-
 		public SkiaDrawable()
 		{
 			this.colorType = Platform.Instance.IsWinForms || Platform.Instance.IsWpf ? SKColorType.Bgra8888 : SKColorType.Rgba8888;
 		}
+
+		public new event EventHandler<SKPaintEventArgs>? Paint;
 
 		protected virtual void OnPaint(SKPaintEventArgs e)
 		{
