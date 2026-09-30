@@ -47,6 +47,9 @@ jobs:
 
     runs-on: windows-latest
 
+    permissions:
+      id-token: write  # required to request a short-lived NuGet API key via OIDC trusted publishing
+
     steps:
     - uses: actions/checkout@v4
       with:
@@ -72,6 +75,13 @@ jobs:
         name: nuget
         path: Eto.SkiaDraw/bin/Release/*.nupkg
 
+    - name: NuGet login (OIDC -> temp API key)
+      if: (github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/'))
+      uses: NuGet/login@v1
+      id: nuget-login
+      with:
+        user: rafntor # nuget.org username (profile name), not email
+
     - name: Push to nuget.org
       if: (github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/'))
-      run: dotnet nuget push '.\Eto.SkiaDraw\bin\Release\*.nupkg' --skip-duplicate -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_API_KEY}}
+      run: dotnet nuget push '.\Eto.SkiaDraw\bin\Release\*.nupkg' --skip-duplicate -s https://api.nuget.org/v3/index.json -k ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
